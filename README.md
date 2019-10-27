@@ -1,3 +1,3 @@
 # ComputerGraphicsProject
 
-## platform:Java
+## platform:JavaFX
