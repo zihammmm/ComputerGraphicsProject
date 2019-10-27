@@ -137,7 +137,7 @@ public class GraphSystem {
                 process(myCommand);
                 count++;
             }
-        } catch (IOException | CommandNotFound | IllegalAccessException | InvocationTargetException e) {
+        } catch (IOException | CommandNotFound | InvocationTargetException e) {
             e.printStackTrace();
             return false;
         }
