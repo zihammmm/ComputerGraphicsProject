@@ -1,19 +1,19 @@
 package algorithm;
 
 public class LineAlgorithm extends Algorithm{
-    public void CohenSutherland(){
+    public static void CohenSutherland(){
 
     }
 
-    public void LiangBarsky(){
+    public static void LiangBarsky(){
 
     }
 
-    public void DDA(){
+    public static void dda(){
 
     }
 
-    public void bresenham(){
+    public static void bresenham(){
 
     }
 }

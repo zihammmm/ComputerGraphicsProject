@@ -22,6 +22,7 @@ public class Reslover implements ResloverMethod{
         String[] ss=cmd.split("\\s+");
         CommandType c;
         c=fitter(ss[0]);
+        //String c = ss[0];
 
         Class<?> mclass = this.getClass();
         Method[] methods = mclass.getDeclaredMethods();
