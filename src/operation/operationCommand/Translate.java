@@ -1,10 +1,13 @@
 package operation.operationCommand;
 
+import algorithm.Algorithm;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.PixelWriter;
+import javafx.scene.paint.Color;
 import operation.MyCommand;
 import operation.PaintMethod;
 import operation.Type;
+import sample.MyBrush;
 
 public class Translate extends OperationCommand {
     private int dx;
@@ -18,13 +21,18 @@ public class Translate extends OperationCommand {
         dy = y;
     }
 
+    @Override
+    public boolean paint() {
+        Algorithm.translate(dx, dy, pc);
+        pc.calculatePoints();
+
+        return true;
+    }
+
     /*@Override
     public void paint(PixelWriter pixelWriter) {
 
     }*/
 
-    @Override
-    public boolean paint(GraphicsContext gc) {
-        return true;
-    }
+
 }

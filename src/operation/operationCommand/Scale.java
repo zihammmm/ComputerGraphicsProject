@@ -1,10 +1,9 @@
 package operation.operationCommand;
 
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.PixelWriter;
-import operation.MyCommand;
-import operation.PaintMethod;
-import operation.Type;
+import algorithm.Algorithm;
+import javafx.scene.paint.Color;
+import sample.MyBrush;
+
 
 public class Scale extends OperationCommand {
     private int x;
@@ -20,13 +19,18 @@ public class Scale extends OperationCommand {
         s = ss;
     }
 
+    @Override
+    public boolean paint() {
+        Algorithm.scale(x, y, s, pc);
+        pc.calculatePoints();
+
+        return true;
+    }
+
     /*@Override
     public void paint(PixelWriter pixelWriter) {
 
     }*/
 
-    @Override
-    public boolean paint(GraphicsContext gc) {
-        return true;
-    }
+
 }

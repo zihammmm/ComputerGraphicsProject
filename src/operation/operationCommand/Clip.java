@@ -1,11 +1,11 @@
 package operation.operationCommand;
 
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.PixelWriter;
-import operation.MyCommand;
-import operation.PaintMethod;
-import operation.Type;
+import algorithm.LineAlgorithm;
+import algorithm.ClipType;
+import javafx.scene.paint.Color;
 import operation.primitiveCommand.DrawLine;
+import sample.MyBrush;
+
 
 public class Clip extends OperationCommand {
     private int x1;
@@ -34,16 +34,26 @@ public class Clip extends OperationCommand {
     }*/
 
     @Override
-    public boolean paint(GraphicsContext gc) {
-        try {
-            check();
-        }catch (NullPointerException e){
-            /*
-
-             */
+    public boolean paint() {
+        DrawLine line = null;
+        if (pc instanceof DrawLine)
+            line = (DrawLine)pc;
+        else
             return false;
-        }
 
+        ClipType clipType;
+        if (algorithmName.equals("Cohen-Sutherland"))
+            clipType = LineAlgorithm.CohenSutherland(x1, y1, x2, y2, line);
+        else if (algorithmName.equals("Liang-Barsky"))
+            clipType = LineAlgorithm.LiangBarsky(x1, y1, x2, y2, line);
+        else
+            return false;
+
+        if (clipType == ClipType.inside){
+            line.calculatePoints();
+        }else{
+            line.clearPoints();
+        }
         return true;
     }
 

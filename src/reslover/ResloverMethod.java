@@ -14,13 +14,13 @@ public interface ResloverMethod {
 
     SaveCanvas saveCanvas(String[] cmd);
 
-    Rotate rotate(String[] cmd);
+    Rotate rotate(String[] cmd) throws ParameterError;
 
-    Scale scale(String[] cmd);
+    Scale scale(String[] cmd) throws ParameterError;
 
-    Clip clip(String[] cmd);
+    Clip clip(String[] cmd) throws ParameterError;
 
-    Translate translate(String[] cmd);
+    Translate translate(String[] cmd) throws ParameterError;
 
     SetColor setColor(String[] cmd) throws ParameterError;
 

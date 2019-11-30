@@ -8,7 +8,7 @@ import operation.primitiveCommand.PrimitiveCommand;
 public abstract class OperationCommand extends MyCommand implements PaintMethod {
     private int id;
 
-    private PrimitiveCommand pc;
+    protected PrimitiveCommand pc;
 
     public OperationCommand(int i){
         super(Type.oc);

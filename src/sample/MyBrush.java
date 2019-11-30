@@ -5,24 +5,37 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.paint.Color;
 
 public class MyBrush {
-    private Color color;
+    private static Color color;
 
-    private PixelWriter pixelWriter;
+    private static PixelWriter pixelWriter;
 
-    MyBrush(GraphicsContext graphicsContext){
-        this.pixelWriter = graphicsContext.getPixelWriter();
+    private static GraphicsContext graphicsContext;
+
+    public static void init(GraphicsContext gc){
+        pixelWriter = gc.getPixelWriter();
+        graphicsContext = gc;
+        color = Color.BLACK;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public static void setColor(Color c) {
+        color = c;
+        graphicsContext.setStroke(c);
     }
 
-    public boolean colorIsNull(){
+    public static Color getColor(){
+        return color;
+    }
+
+    public static boolean colorIsNull(){
         return color == null;
     }
 
-    public boolean pwIsNull(){
+    public static boolean pwIsNull(){
         return pixelWriter == null;
+    }
+
+    public static void setPixel(int x, int y){
+        pixelWriter.setColor(x, y, color);
     }
 
 }
