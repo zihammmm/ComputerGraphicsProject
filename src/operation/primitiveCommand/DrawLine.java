@@ -93,10 +93,14 @@ public class DrawLine extends PrimitiveCommand{
         }else if (algorithmName.equals("DDA")){
             LineAlgorithm.dda(this);
         }
-        x_min = Math.min(x[0], x[x.length - 1]);
-        x_max = Math.max(x[0], x[x.length - 1]);
-        y_min = Math.min(y[0], y[y.length - 1]);
-        y_max = Math.max(y[0], y[y.length - 1]);
+        /*x_min = Integer.MAX_VALUE;
+        y_min = Integer.MAX_VALUE;
+        y_max = Integer.MIN_VALUE;
+        x_max = Integer.MIN_VALUE;*/
+        x_min = Math.min(x1, x2);
+        x_max = Math.max(x1, x2);
+        y_min = Math.min(y1, y2);
+        y_max = Math.max(y1, y2);
     }
 
     @Override

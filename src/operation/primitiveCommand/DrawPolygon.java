@@ -51,6 +51,7 @@ public class DrawPolygon extends PrimitiveCommand {
     }
 
     public boolean addLine(int x1, int y1, int x2, int y2){
+        System.out.println(x1 + " " + y1 + " " + x2 + " " + y2);
         DrawLine line = null;
         boolean load = false;
         if (n > 1){
@@ -72,6 +73,12 @@ public class DrawPolygon extends PrimitiveCommand {
                 x_max = Math.max(line1.getX_max(), x_max);
                 y_max = Math.max(line1.getY_max(), y_max);
             }
+            /*System.out.println("xy:");
+            System.out.println(x_min + " " + x_max + " " + y_min + " " + y_max);
+            MyBrush.setPixel(x_min, y_min);
+            MyBrush.setPixel(x_min, y_max);
+            MyBrush.setPixel(x_max, y_min);
+            MyBrush.setPixel(x_max, y_max);*/
         }
         return load;
     }
@@ -84,6 +91,7 @@ public class DrawPolygon extends PrimitiveCommand {
         MyBrush.setColor(color);
         for (DrawLine drawLine : lines)
             drawLine.paint();
+
         return true;
     }
 
@@ -93,6 +101,16 @@ public class DrawPolygon extends PrimitiveCommand {
             PolygonAlgorithm.dda(this);
         else if (algorithmName.equals("Bresenham"))
             PolygonAlgorithm.bresenham(this);
+        x_min = Integer.MAX_VALUE;
+        y_min = Integer.MAX_VALUE;
+        y_max = Integer.MIN_VALUE;
+        x_max = Integer.MIN_VALUE;
+        for (DrawLine line1 : lines){
+            x_min = Math.min(line1.getX_min(), x_min);
+            y_min = Math.min(line1.getY_min(), y_min);
+            x_max = Math.max(line1.getX_max(), x_max);
+            y_max = Math.max(line1.getY_max(), y_max);
+        }
     }
 
     @Override

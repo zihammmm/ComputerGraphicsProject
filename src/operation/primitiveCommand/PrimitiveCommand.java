@@ -30,8 +30,6 @@ public abstract class PrimitiveCommand extends MyCommand implements PaintMethod,
         super(Type.pc);
         color = c;
         id = i;
-        x_min = y_min = 1000;
-        x_max = y_max = 1000;
     }
 
     public int getId(){
@@ -67,16 +65,6 @@ public abstract class PrimitiveCommand extends MyCommand implements PaintMethod,
     }
 
     public abstract void calculatePoints();
-
-    public boolean clearPath(){
-        if (x == null || y == null)
-            return false;
-        Color color = MyBrush.getColor();
-        MyBrush.setColor(Color.WHITE);
-        paint();
-        MyBrush.setColor(color);
-        return true;
-    }
 
     public void clearPoints(){
         x = null;

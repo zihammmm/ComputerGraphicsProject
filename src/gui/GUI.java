@@ -31,10 +31,8 @@ public class GUI {
         return graphSystem.getLast();
     }
 
-    public static void operation(String str){
-        String[] strings = str.split("\\s+");
-        int length = strings.length;
-
+    public static void setLoadingFalse(){
+        graphSystem.setLoadingFalse();
     }
 
     /*static void setTools(Tools t){

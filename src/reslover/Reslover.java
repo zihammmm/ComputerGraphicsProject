@@ -12,6 +12,8 @@ import sample.MyBrush;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Reslover implements ResloverMethod{
     private final int maxWidthAndHeight = 1000;
@@ -276,11 +278,15 @@ public class Reslover implements ResloverMethod{
         try {
             id = Integer.parseInt(cmd[1]);
             n = Integer.parseInt(cmd[2]);
-            int[] x = new int[n];
-            int[] y = new int[n];
+            /*int[] x = new int[n];
+            int[] y = new int[n];*/
+            List<Integer> x = new ArrayList<>(n);
+            List<Integer> y = new ArrayList<>(n);
             for (int i = 0, j = 4; i < n; i++, j+=2){
-                x[i] = Integer.parseInt(cmd[j]);
-                y[i] = Integer.parseInt(cmd[j + 1]);
+                x.add(Integer.parseInt(cmd[j]));
+                y.add(Integer.parseInt(cmd[j + 1]));
+                /*x[i] = Integer.parseInt(cmd[j]);
+                y[i] = Integer.parseInt(cmd[j + 1]);*/
             }
             return new DrawCurve(id, n, x, y, cmd[3], MyBrush.getColor());
         }catch (NumberFormatException e){

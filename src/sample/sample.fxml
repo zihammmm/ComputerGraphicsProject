@@ -14,13 +14,14 @@
             <Menu fx:id="menuFile" text="文件">
                 <MenuItem fx:id="menuItemSave" onAction="#handleSaveAction" text="保存" />
                 <MenuItem fx:id="menuItemClear" onAction="#handleClearAction" text="清空" />
+                <MenuItem fx:id="menuItemSetCanvas" onAction="#handleSetCanvasAction" text="设置画布"/>
                 <MenuItem fx:id="menuItemExit" onAction="#handleExitAction" text="退出" />
             </Menu>
             <Menu fx:id="menuTool" text="工具">
                 <fx:define>
                     <ToggleGroup fx:id="toggleGroup1" />
                 </fx:define>
-                <RadioMenuItem fx:id="radioMenuItemLine" onAction="#handleLineAction" text="直线"/>
+                <RadioMenuItem fx:id="radioMenuItemLine" onAction="#handleLineAction" text="直线" toggleGroup="$toggleGroup1"/>
                 <RadioMenuItem fx:id="radioMenuItemPolygon" onAction="#handlePolygonAction" text="多边形" toggleGroup="$toggleGroup1" />
                 <RadioMenuItem fx:id="radioMenuItemEllipse" onAction="#handleEllipseAction" text="椭圆" toggleGroup="$toggleGroup1" />
                 <RadioMenuItem fx:id="radioMenuItemCurve" onAction="#handleCurveAction" text="曲线" toggleGroup="$toggleGroup1" />
@@ -28,6 +29,9 @@
             <Menu text="操作">
                 <RadioMenuItem text="平移" fx:id="radioMenuItemTranslate" onAction="#handleTranslateAction" toggleGroup="$toggleGroup1"/>
                 <RadioMenuItem text="缩放" fx:id="radioMenuItemScale" onAction="#handleScaleAction" toggleGroup="$toggleGroup1"/>
+                <RadioMenuItem text="裁剪" fx:id="radioMenuItemClip" onAction="#handleClipAction" toggleGroup="$toggleGroup1"/>
+                <RadioMenuItem text="旋转" fx:id="radioMenuItemRotate" onAction="#handleRotateAction" toggleGroup="$toggleGroup1"/>
+
             </Menu>
         </MenuBar>
     </top>

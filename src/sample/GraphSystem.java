@@ -26,9 +26,10 @@ import javax.imageio.ImageIO;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GraphSystem {
-    private Canvas canvas;
+    public Canvas canvas;
 
     private GraphicsContext gc;
 
@@ -46,8 +47,6 @@ public class GraphSystem {
         reslover = new Reslover();
         MyBrush.init(gc);
     }
-
-    /* ---------------------------------------------------------------------------*/
 
     public boolean read(BufferedReader in){
         String str;
@@ -168,11 +167,6 @@ public class GraphSystem {
         }
     }
 
-    /*public void test2(){
-        PixelWriter pixelWriter = gc.getPixelWriter();
-        for (int i = 100; i < 200; i++)
-            pixelWriter.setColor(i,i, Color.BLACK);
-    }*/
 
     private void check() throws NullBrush, ColorNotFound {
         if (MyBrush.colorIsNull())
@@ -210,24 +204,6 @@ public class GraphSystem {
         return -1;
     }
 
-    public int getXMin(int id){
-        return memo.get(id - 1).getX_min();
-    }
-
-    public int getYMin(int id){
-        return memo.get(id - 1).getY_min();
-    }
-
-    public int getXMax(int id){
-        return memo.get(id - 1).getX_max();
-    }
-
-    public int getYMax(int id){
-        return memo.get(id - 1).getY_max();
-    }
-
-    /* -------------------------------------------*/
-
     public boolean addPC(int x1, int y1, int x2, int y2, Tools tools){
         switch (tools){
             case line:
@@ -241,6 +217,8 @@ public class GraphSystem {
                     memo.add(new DrawPolygon(memo.size() + 1, MyBrush.getColor()));
                     loading = true;
                 }
+                if (x1 == x2 && y1 ==y2)
+                    break;
                 DrawPolygon drawPolygon = (DrawPolygon) memo.get(memo.size() - 1);
                 if (drawPolygon.addLine(x1, y1, x2, y2)){
                     loading = false;        //边都加完了
@@ -255,6 +233,22 @@ public class GraphSystem {
                 ellipse.paint();
                 break;
             case curve:
+                if (!loading){
+                    List<Integer> x = new ArrayList<>();
+                    List<Integer> y = new ArrayList<>();
+                    x.add(x2);
+                    y.add(y2);
+                    memo.add(new DrawCurve(memo.size() + 1, 1, x, y, "Bezier", MyBrush.getColor()));
+                    loading = true;
+                }else {
+                    assert memo.get(memo.size() - 1) instanceof DrawCurve;
+                    DrawCurve drawCurve = (DrawCurve)memo.get(memo.size() - 1);
+
+                    drawCurve.addPoint(x2, y2);
+                    drawCurve.calculatePoints();
+                    rePaint();
+                    System.out.println("done");
+                }
                 break;
         }
         return loading;
@@ -274,14 +268,14 @@ public class GraphSystem {
             return null;
     }
 
+    public void setLoadingFalse(){
+        loading = false;
+    }
+
     public void clearMemo(){
         memo.clear();
     }
 
-    /*--------------------------------------*/
-    /*
-    接受旋转，平移，裁剪，缩放参数
-     */
     public boolean resloveArgcFromGUI(String argc){
         try {
             process(reslover.reslove(argc));

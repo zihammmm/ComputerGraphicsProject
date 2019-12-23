@@ -18,14 +18,14 @@ public class ElipseAlgorithm extends Algorithm{
         xx.add(xk);
         yy.add(yk);
         while (ry * ry * xk < rx * rx * yk){
+            xx.add(++xk);
+            int i = 2 * ry * ry * xk + ry * ry;
             if (pl < 0){
-                xx.add(++xk);
                 yy.add(yk);
-                pl += 2 * ry * ry * xk + ry * ry;
+                pl += i;
             }else{
-                xx.add(++xk);
                 yy.add(--yk);
-                pl += 2 * ry * ry * xk + ry * ry - 2 * rx * rx * yk;
+                pl += i - 2 * rx * rx * yk;
             }
         }
         pl = ry * ry * (xk + 0.5) * (xk + 0.5) + rx * rx * (y - 1) - rx * rx * ry * ry;
